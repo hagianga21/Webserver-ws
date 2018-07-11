@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Demo</title>    
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+//var socket = io("http://localhost:9000/");
+
+$(function () {
+    var ws = new WebSocket('ws://localhost:9000');
+    $("#mrA").click(function(){
+        ws.send("Hello world");
+    });
+    ws.on('message', function (message){
+        $("#noidung").append(message + ", ")
+    });
+});
+/*
+$(function () {
+    var socket = io();
+    socket.on("Server-send", function(data){
+        $("#noidung").append(data + ", ")
+    });
+
+    $("#mrA").click(function(){
+        socket.emit("Client-send-data", "Hello");
+    });
+});
+*/
+</script>
+
+</head>
+
+<body>
+    Hello world
+    <div id = "mrA">Click send</div>
+    <h2 id="noidung"></h2>
+</body>
+</html>
